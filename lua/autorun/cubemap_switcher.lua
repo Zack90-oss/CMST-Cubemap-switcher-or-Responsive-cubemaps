@@ -311,12 +311,13 @@ if(SERVER)then
 		end
 	end )
 	
-	net.Receive( "dc_]]..game.GetMap()..[[_request", function( len, ply ) 
+	net.Receive( "dc_]]..game.GetMap()..[[_request", function( len, ply )
 		if(!ply.dc_RequestedFullUpdate)then
 			ply.dc_RequestedFullUpdate=true
 			for lightname,_ in pairs(dc_materialnames)do
 				local light = ents.FindByName(lightname)[1]
 				local mode = nil
+				if(!light)then return end
 				if(light:GetInternalVariable("spawnflags")==1)then
 					mode = false
 				else
